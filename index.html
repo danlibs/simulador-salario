@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Novo Piso</title>
+</head>
+<body>
+    
+        <label>CH: </label>
+        <input id="ch" type="number" name="ch"><br>
+        <label>Salário base: R$</label>
+        <input id="salario" type="number" name="salario" pattern="[0-9]+([\.,][0-9]+)?"><br>
+        <label>Quantidade de triênios: </label>
+        <input id="trienios" type="number" name="trienios"><br>
+        <label>Valor da gratificação de titularidade: R$</label>
+        <input id="titularidade" type="number" name="titularidade"><br> 
+        <button onclick="calcular()">Calcular aumento!</button>
+    
+    <h3 id="novo_salario"></h3>
+    <script>
+        function calcular() {
+            let ch = Number(document.getElementById('ch').value)
+            let salario = Number(document.getElementById('salario').value)
+            let trienios = Number(document.getElementById('trienios').value)
+            let titularidade = Number(document.getElementById('titularidade').value)
+        
+            let base = salario * 1.15
+            let aula_suplementar = (ch - 150) * 1.2 * (base / 200)
+            let grat_escolaridade = base * 0.8
+            let valor_trienios = (trienios * 0.05) * (base + grat_escolaridade + titularidade)
+        
+            let total = aula_suplementar + base + grat_escolaridade + titularidade + valor_trienios + 1000 + 319.64
+            
+            document.getElementById('novo_salario').innerHTML = `R$${total.toFixed(2).replace('.', ',')}`
+        }
+    </script>
+</body>
+</html>
